@@ -12,12 +12,12 @@ table, th, td {
 <body>
 
 <table style="width:50%">
-<?php foreach($data as $key => $value): ?> 
   <tr>
     <th>Id</th>
     <th>Name</th> 
     <th>Price</th>
   </tr>
+  <?php foreach($data as $key => $value): ?> 
     <tr>    
       <td><?=$value->id;?></td>
       <td><?=$value->name;?></td>
