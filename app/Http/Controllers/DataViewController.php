@@ -20,4 +20,9 @@ class DataViewController extends Controller
 
         return view('tableview', ['data' => $data]); 
     }
+
+    public function viewaAddForm()
+    { 
+        return view('serviceadd'); 
+    }
 }
