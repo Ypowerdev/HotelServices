@@ -21,9 +21,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
-                        <h2 class="form-title\">Sign up</h2>
+                        <h2 class="form-title\">Add sevices</h2>
                         <hr>
-                        <form action = "/registered" method="POST" class="register-form" id="register-form">
+                        <form action = "/addservice" method="POST" class="register-form" id="register-form">
                         @if(Session::has('success'))
                         <div class="alert alert-success">{{Session::get('success')}}</div>
                         @endif
@@ -33,29 +33,17 @@
                         @csrf 
                             <div class="form-group">
 								<label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-								<input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" placeholder="Ваше Имя"/>
+								<input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" placeholder="Ниаменование услуги"/>
                                 <span class="text-danger">@error('name'){{$message}}@enderror</span>
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="Ваша почта"/>
+                                <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="Стоимость услуги"/>
                                 <span class="text-danger">@error('email'){{$message}}@enderror</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" class="form-control"  name="password" id="password" placeholder="Пароль"/>
-                                <span class="text-danger">@error('password'){{$message}}@enderror</span>
-                            </div>
-                            <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" class="form-control" name="re_pass" id="re_pass" placeholder="Повторите пароль"/>
                             </div><br>
+                           
                             <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                                <label for="agree-term" class="label-agree-term"><span><span></span></span>Я согласен со всеми условиями <a href="#" class="term-service">Соглашения об оказании услуг</a></label>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-block btn-primary" type="submit" value="Register">Зарегистрироваться</button> 
+                                <button class="btn btn-block btn-primary" type="submit" value="Register">Отправить</button> 
                             </div>
                         </form>
                     </div>
