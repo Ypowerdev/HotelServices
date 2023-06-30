@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Services;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +15,7 @@ class DataViewController extends Controller
 {
     public function viewTable()
     { 
-
         $data = DB::table('services')->get();
-
         return view('tableview', ['data' => $data]); 
     }
 
@@ -25,4 +23,23 @@ class DataViewController extends Controller
     { 
         return view('serviceadd'); 
     }
+
+    public function store(Request $request)
+    { 
+        $request->validate([ 
+            'name' => ['required', 'min:3', 'max:15'], 
+            'price' => ['required']           
+        ]);
+                       
+        $services = new Services(); 
+        $services->name = $request->name; 
+        $services->price = $request->price; 
+        $res = $services->save(); 
+
+        if($res){ 
+            return back()->with('success', 'New service added ');
+        }else{ 
+            return back()->with('fail', 'Something went wrong');
+        }        
+    }   
 }

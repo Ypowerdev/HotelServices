@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/table',[DataViewController::class, 'viewTable']);
 Route::get('/addservice',[DataViewController::class, 'viewaAddForm']);
+Route::post('/addservice',[DataViewController::class, 'store']);
