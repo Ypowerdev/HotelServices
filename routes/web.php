@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/table',[DataViewController::class, 'viewTable']);
-Route::get('/addservice',[DataViewController::class, 'viewaAddForm']);
+//Route::get('/addservice',[DataViewController::class, 'viewTable']);
+Route::get('/addservice',[DataViewController::class, 'viewTable']);
 Route::post('/addservice',[DataViewController::class, 'store']);

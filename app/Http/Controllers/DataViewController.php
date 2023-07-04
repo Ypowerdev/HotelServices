@@ -16,13 +16,13 @@ class DataViewController extends Controller
     public function viewTable()
     { 
         $data = DB::table('services')->get();
-        return view('tableview', ['data' => $data]); 
+        return view('serviceadd', ['data' => $data]); 
     }
 
-    public function viewaAddForm()
-    { 
-        return view('serviceadd'); 
-    }
+    // public function viewAddForm()
+    // { 
+    //     return view('serviceadd'); 
+    // }
 
     public function store(Request $request)
     { 
