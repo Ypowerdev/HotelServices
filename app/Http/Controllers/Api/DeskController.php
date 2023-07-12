@@ -27,11 +27,12 @@ class DeskController extends Controller
         $services->name = $request->name; 
         $services->price = $request->price; 
         $res = $services->save(); 
+        return new JsonResponse([]); 
 
-        if($res){ 
-            return back()->with('success', 'New service added ');
-        }else{ 
-            return back()->with('fail', 'Something went wrong');
-        }        
+        // if($res){ 
+        //     return back()->with('success', 'New service added ');
+        // }else{ 
+        //     return back()->with('fail', 'Something went wrong');
+        // }        
     } 
 }

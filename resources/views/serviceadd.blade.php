@@ -45,7 +45,7 @@ table, th, td {
                     <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
                         <h2 class="form-title\">Add sevices</h2>
                         <hr>
-                        <form action = "/addservice" method="POST" class="register-form" id="register-form">
+                        <form action = "#" method="POST" class="register-form" id="register-form">
                         @if(Session::has('success'))
                         <div class="alert alert-success">{{Session::get('success')}}</div>
                         @endif
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
     // Send a POST request to the server
     $.ajax({
-      url: '/services', // Replace with your actual API endpoint
+      url: '/api/services', // Replace with your actual API endpoint
       type: 'POST',
       data: formData,
       success: function(response) {
