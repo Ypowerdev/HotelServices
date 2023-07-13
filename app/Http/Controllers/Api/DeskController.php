@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\Models\Service;
 use DB;
 use App\Http\Resources\DeskResource; 
+use App\Http\Requests\DeskStoreRequest; 
 
 
 class DeskController extends Controller
@@ -24,28 +25,23 @@ class DeskController extends Controller
     }
 
 
-    public function store(Request $request)
-    { 
-        $request->validate([ 
-            'name' => ['required', 'min:3', 'max:15'], 
-            'price' => ['required']           
-        ]);
-                       
-        $services = new Services(); 
-        $services->name = $request->name; 
-        $services->price = $request->price; 
-        $res = $services->save(); 
-        return new JsonResponse([]); 
+    public function store(DeskStoreRequest $request)
+    {                              
+        $created_desk = Service::create($request->validated()); 
 
-        // if($res){ 
-        //     return back()->with('success', 'New service added ');
-        // }else{ 
-        //     return back()->with('fail', 'Something went wrong');
-        // }        
+        return new DeskResource($created_desk);        
     } 
 
-    public function update(Request $request, $id)
+    public function update(DeskStoreRequest $request, Service $desk)
     { 
+        $desk->update($request->validated()); 
+        return new DeskResource($desk); 
+    }
 
+    public function destroy(Service $desk)
+    { 
+        $desk->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
