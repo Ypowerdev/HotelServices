@@ -16,7 +16,7 @@ class DeskController extends Controller
         return new JsonResponse(['data' => $data]); 
     }
 
-     public function store(Request $request)
+    public function store(Request $request)
     { 
         $request->validate([ 
             'name' => ['required', 'min:3', 'max:15'], 
@@ -35,4 +35,9 @@ class DeskController extends Controller
         //     return back()->with('fail', 'Something went wrong');
         // }        
     } 
+
+    public function update(Request $request, $id)
+    { 
+        
+    }
 }
