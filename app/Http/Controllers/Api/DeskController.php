@@ -5,16 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Models\Services;
+use App\Models\Service;
 use DB;
+use App\Http\Resources\DeskResource; 
+
 
 class DeskController extends Controller
 {
     public function list()
     { 
-        $data = DB::table('services')->get();
-        return new JsonResponse(['data' => $data]); 
+        return DeskResource::collection(Service::all()); 
+        
     }
+
+    public function show($id)
+    { 
+        return new DeskResource(Service::findOrFail($id)); 
+    }
+
 
     public function store(Request $request)
     { 
@@ -38,6 +46,6 @@ class DeskController extends Controller
 
     public function update(Request $request, $id)
     { 
-        
+
     }
 }

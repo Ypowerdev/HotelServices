@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/services',[DeskController::class, 'list']);
+Route::get('/services/{id}',[DeskController::class, 'show']);
 Route::post('/services', [DeskController::class, 'store']);
