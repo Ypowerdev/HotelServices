@@ -23,3 +23,6 @@ Route::get('/services',[DeskController::class, 'list']);
 Route::get('/services/{id}',[DeskController::class, 'show']);
 Route::post('/services', [DeskController::class, 'store']);
 Route::put('/services/{id}', [DeskController::class, 'update']);
+
+Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
+Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
