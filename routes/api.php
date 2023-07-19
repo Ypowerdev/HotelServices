@@ -24,6 +24,11 @@ Route::get('/services/{id}',[DeskController::class, 'show']);
 Route::post('/services', [DeskController::class, 'store']);
 Route::put('/services/{id}', [DeskController::class, 'update']);
 
-Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
+
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function(){ 
+    Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
+    Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+});

@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use App\Models\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Cookie;
+
 
 class AuthController extends Controller
 {
@@ -22,7 +26,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     { 
-       if(Auth::attempt($request->only('email', 'password'))){ 
+       if(!Auth::attempt($request->only('email', 'password'))){ 
            return response([
                 'message' => 'Invalid credentials'
            ], Response::HTTP_UNAUTHORIZED);  
@@ -32,12 +36,24 @@ class AuthController extends Controller
 
         $token = $user->createToken('token')->plainTextToken; 
 
-        return $user; 
-    }
+        $cookie = cookie('jwt', $token, 60 * 24);
 
+        return response([ 
+            'message' => 'Success'
+        ])->withCookie($cookie);
+    }
 
     public function user()
     { 
+        return Auth::user(); 
+    }
 
+    public function logout()
+    { 
+        $cookie = Cookie::forget('jwt');
+
+        return response ([
+            'message' => 'Success'
+        ])->withCookie($cookie); 
     }
 }
