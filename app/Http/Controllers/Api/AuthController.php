@@ -56,4 +56,12 @@ class AuthController extends Controller
             'message' => 'Success'
         ])->withCookie($cookie); 
     }
+
+    public function helloUser()
+    { 
+        $user = Auth::user(); 
+        $email = $user->email; 
+        echo  'Hello, {{ $email }}'; 
+    }
+
 }
