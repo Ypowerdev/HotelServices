@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use App\Models\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Auth\AuthenticationException;
 
 
 class AuthController extends Controller
@@ -61,7 +62,7 @@ class AuthController extends Controller
     { 
         $user = Auth::user(); 
         $email = $user->email; 
-        echo  'Hello, {{ $email }}'; 
+        echo  'Hello' . $email ; 
     }
 
 }
