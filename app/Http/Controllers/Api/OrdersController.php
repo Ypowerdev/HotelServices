@@ -23,11 +23,11 @@ class OrdersController extends Controller
         $service = Service::findOrFail($data['service_id']);
 
         $order = new Order(); 
-        $order->service_id = $service->id;
+        $order->service()->associate($service->id);
         $order->price = $service->price;
         $order->user_id = Auth::user()->id;
         $order->save(); 
 
-        // return new OrderResource($data);
+        return new OrderResource($data);
     }   
 }
