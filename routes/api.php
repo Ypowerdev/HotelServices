@@ -26,10 +26,11 @@ Route::put('/services/{id}', [DeskController::class, 'update']);
 
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
-Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');;
+Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function(){ 
     Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
     Route::get('/hellouser', [\App\Http\Controllers\Api\AuthController::class, 'helloUser']);
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+    Route::post('/orders', [\App\Http\Controllers\Api\OrdersController::class, 'store']);
 });

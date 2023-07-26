@@ -62,7 +62,7 @@ class AuthController extends Controller
     { 
         $user = Auth::user(); 
         $email = $user->email; 
-        echo  'Hello' . $email ; 
+        echo  'Hello ' . "{$email}" ; 
     }
 
 }
