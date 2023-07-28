@@ -12,12 +12,12 @@ class OrderResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request)
     {
        return [
-            'service_id' => $this->service_id, 
-            'price' => $this->price,
-            'user_id' =>$this->user_id
+            // 'user_id' =>$this->user_id, 
+            // 'service_id' => $this->service_id,
+            // 'price' => $this->price            
        ]; 
     }
 }

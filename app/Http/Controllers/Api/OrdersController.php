@@ -28,6 +28,10 @@ class OrdersController extends Controller
         $order->user_id = Auth::user()->id;
         $order->save(); 
 
+        // return response([ 
+        //     'message' => 'Success'
+        // ]);
+
         return new OrderResource($data);
     }   
 }
