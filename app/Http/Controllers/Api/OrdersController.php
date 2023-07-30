@@ -32,6 +32,6 @@ class OrdersController extends Controller
         //     'message' => 'Success'
         // ]);
 
-        return new OrderResource($data);
+        return new OrderResource($order);
     }   
 }
