@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hotels', function (Blueprint $table) {
-            $table->id();
-            $table->string('adress'); 
-            $table->integer('coordinates');                     
+        Schema::table('hotels', function (Blueprint $table){ 
+             $table->string('name');  
         });
     }
 
@@ -23,6 +21,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hotels');
+        Schema::table('hotels', function (Blueprint $table){ 
+            $table->dropForeign(['city_id']);
+            $table->dropColumn('city_id');
+            $table->dropColumn('name');
+        }); 
     }
 };
