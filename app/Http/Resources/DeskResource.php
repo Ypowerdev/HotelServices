@@ -18,6 +18,8 @@ class DeskResource extends JsonResource
             'id' => $this->id, 
             'name' => $this->name, 
             'price' => $this->price,
+            'hotel_id' => $this->hotel_id, 
+            'parent_id' => $this->parent_id
        ]; 
     }
 }
