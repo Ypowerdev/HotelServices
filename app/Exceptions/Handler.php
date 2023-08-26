@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Helpers\Telegram;
+use Illuminate\Container\Container;
 
 class Handler extends ExceptionHandler
 {
@@ -18,26 +20,30 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     */
+    protected $telegram; 
+
+    public function __construct(Container $container, Telegram $telegram)
+    {
+        parent::__construct($container); 
+        $this->telegram = $telegram;         
+    }
+    
+    public function report (Throwable $e)
+    { 
+        $data = [ 
+            'description' => $e->getMessage(), 
+            'file' => $e->getFile(), 
+            'line' => $e->getLine(),
+        ];    
+        
+        $this->telegram->sendMessage (env('REPORT_TELEGRAM_ID'), view('report', $data));
+
+    }
+
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
             //
         });
     }
-
-    // public function render($request, ExceptionHandler $exception)
-    // {
-    // // This will replace our 404 response with
-    // // a JSON response.
-    // if ($exception instanceof ModelNotFoundException) {
-    //     return response()->json([
-    //         'error' => 'Resource not found'
-    //     ], 404);
-    // }
-
-    // return parent::render($request, $exception);
-    // }
 }

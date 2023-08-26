@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataViewController;
+use Illuminate\Support\Facades\Http; 
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,7 @@ use App\Http\Controllers\DataViewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () {   
 });
 
 //Route::get('/addservice',[DataViewController::class, 'viewTable']);
