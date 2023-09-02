@@ -22,7 +22,7 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'service_id' => 'required'           
+            'service_id' => 'required|integer'           
         ];
     }
 }

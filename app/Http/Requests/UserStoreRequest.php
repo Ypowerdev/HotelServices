@@ -23,8 +23,8 @@ class ServiceStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:20', 
-            'price' => 'required|numeric',
-            'hotel_id' => 'required|integer'
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:5|max:20'
         ];
     }
 }
