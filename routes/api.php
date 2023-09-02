@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DeskController;
+use App\Http\Controllers\Api\ServiceController;
+use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/services',[DeskController::class, 'list']);
-Route::get('/services/{id}',[DeskController::class, 'show']);
-Route::post('/services', [DeskController::class, 'store']);
-Route::put('/services/{id}', [DeskController::class, 'update']);
+Route::get('/services',[ServiceController::class, 'list']);
+Route::get('/services/{id}',[ServiceController::class, 'show']);
+Route::post('/services', [ServiceController::class, 'store']);
+Route::put('/services/{id}', [ServiceController::class, 'update']);
 
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);

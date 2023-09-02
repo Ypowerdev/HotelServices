@@ -8,12 +8,8 @@ class Telegram {
 
     const URL = 'https://api.telegram.org/';
 
-    protected $http;
-    protected $bot;
-
-    public function __construct($bot)
-    {
-        $this->bot = $bot; 
+    public function __construct(protected string $bot)
+    {       
     }
 
     public function sendMessage($chat_id, $message) { 

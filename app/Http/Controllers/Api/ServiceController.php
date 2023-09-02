@@ -13,8 +13,7 @@ class ServiceController extends Controller
 {
     public function list()
     { 
-        return ServiceResource::collection(Service::all()); 
-        
+        return ServiceResource::collection(Service::all());         
     }
 
     public function show($id)
@@ -22,23 +21,23 @@ class ServiceController extends Controller
         return new ServiceResource(Service::findOrFail($id)); 
     }
 
-
     public function store(ServiceStoreRequest $request)
     {                              
-        $created_desk = Service::create($request->validated()); 
+        $created_service = Service::create($request->validated()); 
 
-        return new ServiceResource($created_desk);        
+        return new ServiceResource($created_service);        
     } 
 
-    public function update(ServiceStoreRequest $request, Service $desk)
+    public function update(ServiceStoreRequest $request, Service $service)
     { 
-        $desk->update($request->validated()); 
-        return new ServiceResource($desk); 
+        $service->update($request->validated()); 
+        
+        return new ServiceResource($service); 
     }
 
-    public function destroy(Service $desk)
+    public function destroy(Service $service)
     { 
-        $desk->delete();
+        $service->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
