@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\HotelController;
+use App\Models\Hotel;
 use Laravel\Sanctum\Sanctum;
 
 /*
@@ -24,6 +26,11 @@ Route::get('/services',[ServiceController::class, 'list']);
 Route::get('/services/{id}',[ServiceController::class, 'show']);
 Route::post('/services', [ServiceController::class, 'store']);
 Route::put('/services/{id}', [ServiceController::class, 'update']);
+
+Route::get('/hotels',[HotelController::class, 'list']);
+Route::get('/hotels/{id}',[HotelController::class, 'show']);
+Route::post('/hotels', [HotelController::class, 'store']);
+Route::put('/services/{id}', [HotelController::class, 'update']);
 
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
