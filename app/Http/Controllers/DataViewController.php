@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Services;
+use App\Models\Service;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +31,7 @@ class DataViewController extends Controller
             'price' => ['required']           
         ]);
                        
-        $services = new Services(); 
+        $services = new Service(); 
         $services->name = $request->name; 
         $services->price = $request->price; 
         $res = $services->save(); 
