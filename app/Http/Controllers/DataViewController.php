@@ -4,12 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule; 
-use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class DataViewController extends Controller 
 {
@@ -18,11 +14,6 @@ class DataViewController extends Controller
         $data = DB::table('services')->get();
         return view('serviceadd', ['data' => $data]); 
     }
-
-    // public function viewAddForm()
-    // { 
-    //     return view('serviceadd'); 
-    // }
 
     public function store(Request $request)
     { 

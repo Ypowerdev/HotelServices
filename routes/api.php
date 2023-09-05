@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\CountryController;
 use App\Models\Hotel;
 use Laravel\Sanctum\Sanctum;
 
@@ -37,6 +38,11 @@ Route::get('/cities',[CityController::class, 'list']);
 Route::get('/cities/{id}',[CityController::class, 'show']);
 Route::post('/cities', [CityController::class, 'store']);
 Route::put('/cities/{id}', [CityController::class, 'update']);
+
+Route::get('/countries',[CountryController::class, 'list']);
+Route::get('/countries/{id}',[CountryController::class, 'show']);
+Route::post('/countries', [CountryController::class, 'store']);
+Route::put('/countries/{id}', [CountryController::class, 'update']);
 
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);

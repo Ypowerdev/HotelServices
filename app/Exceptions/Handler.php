@@ -20,26 +20,6 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    protected $telegram; 
-
-    public function __construct(Container $container, Telegram $telegram)
-    {
-        parent::__construct($container); 
-        $this->telegram = $telegram;         
-    }
-    
-    public function report (Throwable $e)
-    { 
-        $data = [ 
-            'description' => $e->getMessage(), 
-            'file' => $e->getFile(), 
-            'line' => $e->getLine(),
-        ];    
-        
-        $this->telegram->sendMessage (env('REPORT_TELEGRAM_ID'), view('report', $data));
-
-    }
-
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {

@@ -8,7 +8,6 @@ use App\Http\Resources\CityResource;
 use App\Http\Requests\CityStoreRequest; 
 use Illuminate\Http\Response;
 
-
 class CityController extends Controller
 {
     public function list()

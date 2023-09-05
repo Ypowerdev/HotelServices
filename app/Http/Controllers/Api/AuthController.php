@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
-use App\Models\Sanctum\PersonalAccessToken;
-use Laravel\Sanctum\Sanctum;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Auth\AuthenticationException;
-
 
 class AuthController extends Controller
 {
@@ -59,12 +55,5 @@ class AuthController extends Controller
             'message' => 'Success'
         ])->withCookie($cookie); 
     }
-
-    public function helloUser()
-    { 
-        $user = Auth::user(); 
-        $email = $user->email; 
-        echo  'Hello ' . "{$email}" ; 
-    }
-
+  
 }
