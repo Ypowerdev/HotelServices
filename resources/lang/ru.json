@@ -1,3 +1,6 @@
 {
-    "Welcome to our website": "Добро пожаловать на наш сайт"
+    "Welcome to our website": "Добро пожаловать на наш сайт",
+    "notifications" : { 
+        "order_create": "Поздравляем. Вы сделали заказ товара(услуги). id товара(услуги): :serviceId"        
+    }
 }

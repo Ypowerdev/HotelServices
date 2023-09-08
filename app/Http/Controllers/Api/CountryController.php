@@ -8,7 +8,6 @@ use App\Http\Resources\CountryResource;
 use App\Http\Requests\CountryStoreRequest; 
 use Illuminate\Http\Response;
 
-
 class CountryController extends Controller
 {
     public function list()

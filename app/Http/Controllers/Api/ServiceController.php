@@ -10,7 +10,6 @@ use App\Http\Requests\ServiceStoreRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 
-
 class ServiceController extends Controller
 {
     public function list()

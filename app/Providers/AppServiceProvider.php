@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Helpers\Telegram; 
-use Illuminate\Support\Facades\Http;
+use App\Services\Telegram; 
 
 class AppServiceProvider extends ServiceProvider
 {

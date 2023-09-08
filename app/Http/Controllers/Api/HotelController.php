@@ -8,7 +8,6 @@ use App\Http\Resources\HotelResource;
 use App\Http\Requests\HotelStoreRequest; 
 use Illuminate\Http\Response;
 
-
 class HotelController extends Controller
 {
     public function list()

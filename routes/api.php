@@ -32,7 +32,7 @@ Route::put('/services/{id}', [ServiceController::class, 'update']);
 Route::get('/hotels',[HotelController::class, 'list']);
 Route::get('/hotels/{id}',[HotelController::class, 'show']);
 Route::post('/hotels', [HotelController::class, 'store']);
-Route::put('/services/{id}', [HotelController::class, 'update']);
+Route::put('/hotels/{id}', [HotelController::class, 'update']);
 
 Route::get('/cities',[CityController::class, 'list']);
 Route::get('/cities/{id}',[CityController::class, 'show']);
@@ -44,13 +44,11 @@ Route::get('/countries/{id}',[CountryController::class, 'show']);
 Route::post('/countries', [CountryController::class, 'store']);
 Route::put('/countries/{id}', [CountryController::class, 'update']);
 
-
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function(){ 
     Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
-    Route::get('/hellouser', [\App\Http\Controllers\Api\AuthController::class, 'helloUser']);
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
     Route::post('/orders', [\App\Http\Controllers\Api\OrdersController::class, 'store']);
 });
