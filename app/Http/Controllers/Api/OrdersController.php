@@ -10,7 +10,6 @@ use App\Models\Service;
 use App\Http\Resources\OrderResource; 
 use App\Http\Requests\OrderStoreRequest; 
 
-
 class OrdersController extends Controller
 {
     public function store(OrderStoreRequest $request, Telegram $telegram )

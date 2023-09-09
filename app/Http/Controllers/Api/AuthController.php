@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(UserStoreRequest $request)
     { 
         return User::create([
             'name' => $request->input('name'),  
@@ -21,7 +22,7 @@ class AuthController extends Controller
         ]);         
     }
 
-    public function login(Request $request)
+    public function login(UserStoreRequest $request)
     { 
        if(!Auth::attempt($request->only('email', 'password'))){ 
            return response([
@@ -34,12 +35,18 @@ class AuthController extends Controller
          */        
         $user = Auth::user(); 
 
-        $token = $user->createToken('token')->plainTextToken; 
+        $token = $user->createToken('token')->plainTextToken;
+        
+        $cookie = cookie('jwt', $token, 60 * 24);
 
         return response([ 
-            'message' => 'Success',
-            'token' => $token
-        ]);
+            'message' => 'Success'
+        ])->withCookie($cookie);
+
+        // return response([ 
+        //     'message' => 'Success',
+        //     'token' => $token
+        // ]);
     }
 
     public function user()

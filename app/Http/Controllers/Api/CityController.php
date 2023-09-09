@@ -22,9 +22,9 @@ class CityController extends Controller
 
     public function store(CityStoreRequest $request)
     {                              
-        $created_service = City::create($request->validated()); 
+        $createdService = City::create($request->validated()); 
 
-        return new CityResource($created_service);        
+        return new CityResource($createdService);        
     } 
 
     public function update(CityStoreRequest $request, City $service)

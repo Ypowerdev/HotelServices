@@ -15,16 +15,16 @@ class CountryController extends Controller
         return CountryResource::collection(Country::all());         
     }
 
-    public function show($id)
+    public function show(int $id)
     { 
         return new CountryResource(Country::findOrFail($id)); 
     }
 
     public function store(CountryStoreRequest $request)
     {                              
-        $created_service = Country::create($request->validated()); 
+        $createdService = Country::create($request->validated()); 
 
-        return new CountryResource($created_service);        
+        return new CountryResource($createdService);        
     } 
 
     public function update(CountryStoreRequest $request, Country $service)

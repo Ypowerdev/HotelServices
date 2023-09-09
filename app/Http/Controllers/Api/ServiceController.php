@@ -17,7 +17,7 @@ class ServiceController extends Controller
         return ServiceResource::collection(Service::all());         
     }
 
-    public function show($id)
+    public function show(int $id)
     { 
         return new ServiceResource(Service::findOrFail($id)); 
     }
@@ -30,9 +30,9 @@ class ServiceController extends Controller
             $hotel = Hotel::findOrFail($hotelId);
                 
             if (isset($hotel)){ 
-                $created_service = Service::create($request->validated()); 
+                $createdService = Service::create($request->validated()); 
             }        
-            return new ServiceResource($created_service);      
+            return new ServiceResource($createdService);      
             
         }catch (ModelNotFoundException $exception){ 
             return response()->json(['message' => 'Отель c ID: ' . $hotelId . ' не найден'], 404);
