@@ -6,8 +6,6 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\CountryController;
-use App\Models\Hotel;
-use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------

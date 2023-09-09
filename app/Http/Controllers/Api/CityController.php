@@ -15,7 +15,7 @@ class CityController extends Controller
         return CityResource::collection(City::all());         
     }
 
-    public function show($id)
+    public function show(int $id)
     { 
         return new CityResource(City::findOrFail($id)); 
     }

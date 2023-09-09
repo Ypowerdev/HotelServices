@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
@@ -22,7 +22,7 @@ class AuthController extends Controller
         ]);         
     }
 
-    public function login(UserStoreRequest $request)
+    public function login(Request $request)
     { 
        if(!Auth::attempt($request->only('email', 'password'))){ 
            return response([
@@ -60,7 +60,9 @@ class AuthController extends Controller
 
         return response ([
             'message' => 'Success'
-        ])->withCookie($cookie); 
-    }
+        ])->withCookie($cookie);    
   
+    }
+
+    
 }

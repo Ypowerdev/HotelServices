@@ -15,7 +15,7 @@ class HotelController extends Controller
         return HotelResource::collection(Hotel::all());         
     }
 
-    public function show($id)
+    public function show(int $id)
     { 
         return new HotelResource(Hotel::findOrFail($id)); 
     }
