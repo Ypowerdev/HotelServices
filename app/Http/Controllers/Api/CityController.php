@@ -22,22 +22,23 @@ class CityController extends Controller
 
     public function store(CityStoreRequest $request)
     {                              
-        $createdService = City::create($request->validated()); 
-
-        return new CityResource($createdService);        
+        $createdCity = City::create($request->validated()); 
+        
+        return new CityResource($createdCity);        
     } 
 
-    public function update(CityStoreRequest $request, City $service)
+    public function update(CityStoreRequest $request, City $city)
     { 
-        $service->update($request->validated()); 
-        
-        return new CityResource($service); 
+        $cityId = $city->findOrFail($request->route('id')); 
+
+        $cityId->update($request->validated());  
+
+        return new CityResource($cityId); 
     }
 
-    public function destroy(City $service)
+    public function destroy(City $city)
     { 
-        $service->delete();
-
+        $city->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

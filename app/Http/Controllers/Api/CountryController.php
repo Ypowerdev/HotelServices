@@ -22,21 +22,23 @@ class CountryController extends Controller
 
     public function store(CountryStoreRequest $request)
     {                              
-        $createdService = Country::create($request->validated()); 
+        $createdCountry = Country::create($request->validated()); 
 
-        return new CountryResource($createdService);        
+        return new CountryResource($createdCountry);        
     } 
 
-    public function update(CountryStoreRequest $request, Country $service)
+    public function update(CountryStoreRequest $request, Country $country)
     { 
-        $service->update($request->validated()); 
-        
-        return new CountryResource($service); 
+        $countryId = $country->findOrFail($request->route('id')); 
+
+        $countryId->update($request->validated());  
+
+        return new CountryResource($countryId); 
     }
 
-    public function destroy(Country $service)
+    public function destroy(Country $country)
     { 
-        $service->delete();
+        $country->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

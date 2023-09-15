@@ -24,7 +24,6 @@ class OrdersController extends Controller
         $order->user_id = Auth::user()->id;
         $order->save(); 
 
-         //$message = 'Поздравляем. Вы сделали заказ товара(услуги). id товара(услуги): ' . $order->service_id;
         $message = trans( 
             'notifications.order_create', 
             [

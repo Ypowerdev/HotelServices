@@ -22,21 +22,23 @@ class HotelController extends Controller
 
     public function store(HotelStoreRequest $request)
     {                              
-        $createdService = Hotel::create($request->validated()); 
+        $createdHotel = Hotel::create($request->validated()); 
 
-        return new HotelResource($createdService);        
+        return new HotelResource($createdHotel);        
     } 
 
-    public function update(HotelStoreRequest $request, Hotel $service)
+    public function update(HotelStoreRequest $request, Hotel $hotel)
     { 
-        $service->update($request->validated()); 
-        
-        return new HotelResource($service); 
+        $hotelId = $hotel->findOrFail($request->route('id')); 
+
+        $hotelId->update($request->validated());  
+
+        return new HotelResource($hotelId); 
     }
 
-    public function destroy(Hotel $service)
+    public function destroy(Hotel $hotel)
     { 
-        $service->delete();
+        $hotel->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
