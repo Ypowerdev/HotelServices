@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Services; 
+namespace App\Notifications; 
 
 use Illuminate\Support\Facades\Http; 
 
