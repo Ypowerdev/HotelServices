@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\HotelNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Hotel;
 use App\Http\Resources\ServiceResource; 
 use App\Http\Requests\ServiceStoreRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\Service\ServiceStoreService;
 use Illuminate\Http\Response;
 
 class ServiceController extends Controller
@@ -24,20 +25,17 @@ class ServiceController extends Controller
 
     public function store(ServiceStoreRequest $request)
     {                              
+              
+       try{ 
+            $serviceCreate = (new ServiceStoreService())->store($request); 
+       }catch (HotelNotFoundException $exception) { 
+            return response()->json([
+                'error' => $exception->getMessage()
+           ], 400);  
+       }   
        
-        try{ 
-            $hotelId = $request->input('hotel_id');
-            $hotel = Hotel::findOrFail($hotelId);
-                
-            if (isset($hotel)){ 
-                $createdService = Service::create($request->validated()); 
-            }        
-            return new ServiceResource($createdService);      
-            
-        }catch (ModelNotFoundException $exception){ 
-            return response()->json(['message' => 'Отель c ID: ' . $hotelId . ' не найден'], 404);
-        }  
-               
+       return $serviceCreate;
+                          
     } 
 
     public function update(ServiceStoreRequest $request, Service $service)
