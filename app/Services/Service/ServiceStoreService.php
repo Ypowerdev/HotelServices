@@ -14,15 +14,15 @@ class ServiceStoreService
     public function store (ServiceStoreRequest $request)
     { 
                
-        $hotelId = $request->input('hotel_id');
-        $hotel = Hotel::findOrFail($hotelId);
+        // $hotelId = $request->input('hotel_id'); - никаких реквестов
+        // $hotel = Hotel::findOrFail($hotelId); - вынести в отдельный сервис  
             
-        if (!is_null($hotel)){ 
-            $createdService = Service::create($request->validated()); 
-        }else{ 
-            throw new HotelNotFoundException('Hotel with ' .$hotelId. ' is not in the list');
-        }   
+        return Service::create($request->validated());     
         
-        return $createdService; 
+    }
+
+    public function findOrFail($id)
+    { 
+        return Service::findOrFail($id);  
     }
 }

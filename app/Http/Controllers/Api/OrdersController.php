@@ -10,13 +10,14 @@ use App\Models\Service;
 use App\Http\Resources\OrderResource; 
 use App\Http\Requests\OrderStoreRequest; 
 use App\Services\Order\OrderStoreService;
+use Illuminate\Http\JsonResponse;
 
 class OrdersController extends Controller
 {
     public function store(OrderStoreRequest $request, OrderStoreService $crud)
     { 
         $data = $request->validated(); 
-        $crud->tgNotification();
-        $crud->store($data);       
+        $crud->store($data);  
+        return new JsonResponse();  
     }   
 }

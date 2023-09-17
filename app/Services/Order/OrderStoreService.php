@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Order; 
+namespace App\Services\Order;
 
+use App\Http\Requests\ServiceStoreRequest;
 use App\Models\Order; 
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
@@ -13,26 +14,31 @@ class OrderStoreService
 { 
     public function __construct(
         private Order $order, 
-        private Service $service, 
+        private ServiceStoreService $service, 
         private Telegram $telegram
     )
     {           
     }
 
-    public function store (array $data): OrderResource
+    public function store(array $data): OrderResource
     { 
-        $service = $this->service::findOrFail($data['service_id']);          
-                  
+        $service = $this->service->findOrFail($data['service_id']); 
+                                
         $this->order->service()->associate($service->id);
         $this->order->price = $service->price;
         $this->order->user_id = Auth::user()->id;
         $this->order->save(); 
+
+        /**
+        * TODO: быстрое решение - в будущем спрятать это в события 
+        */
+        $this->tgNotification();
      
         return new OrderResource($this->order);    
        
     }
 
-    public function tgNotification()
+    private function tgNotification()
     { 
         
         $message = trans( 
