@@ -15,22 +15,21 @@ use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
-    public function list()
+    public function list(ServiceMethods $service)
     { 
-        return ServiceResource::collection(Service::all());         
+        return ServiceResource::collection($service->serviceAll());         
     }
 
-    public function show(int $id)
+    public function show(int $id, ServiceMethods $service)
     { 
-        return new ServiceResource(Service::findOrFail($id)); 
+        return new ServiceResource($service->findServiceId($id)); 
     }
 
     public function store(ServiceStoreRequest $request, ServiceMethods $service, HotelMethods $hotel)
     {                              
         $hotelId = $request->input('hotel_id');
-
-        $isHotelExists = $service->store($hotelId, $hotel); 
-         
+        $isHotelExists = $service->store($hotelId, $hotel);
+                  
         return $service->create($request->validated());
                           
     } 
