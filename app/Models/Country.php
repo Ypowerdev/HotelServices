@@ -12,4 +12,9 @@ class Country extends Model
     protected $fillable = ['country_code','name']; 
     
     public $timestamps = false;
+
+    public function cities()
+    { 
+        return $this->hasMany(City::class);        
+    }
 }

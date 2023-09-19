@@ -8,13 +8,14 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\OrderResource; 
 use App\Notifications\Telegram;
+use App\Services\Service\ServiceMethods;
 
-class OrderStoreService 
+class OrderMethods 
 
 { 
     public function __construct(
         private Order $order, 
-        private ServiceStoreService $service, 
+        private ServiceMethods $service, 
         private Telegram $telegram
     )
     {           
@@ -22,7 +23,7 @@ class OrderStoreService
 
     public function store(array $data): OrderResource
     { 
-        $service = $this->service->findOrFail($data['service_id']); 
+        $service = $this->service->findServiceId($data['service_id']); 
                                 
         $this->order->service()->associate($service->id);
         $this->order->price = $service->price;

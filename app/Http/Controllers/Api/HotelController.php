@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Http\Resources\HotelResource; 
 use App\Http\Requests\HotelStoreRequest; 
 use Illuminate\Http\Response;
+use App\Services\Hotel\HotelMethods;
 
 class HotelController extends Controller
 {
@@ -15,9 +16,9 @@ class HotelController extends Controller
         return HotelResource::collection(Hotel::all());         
     }
 
-    public function show(int $id)
+    public function show(int $id, HotelMethods $hotel )
     { 
-        return new HotelResource(Hotel::findOrFail($id)); 
+        return new HotelResource($hotel->findHotelId($id)); 
     }
 
     public function store(HotelStoreRequest $request)
@@ -27,11 +28,12 @@ class HotelController extends Controller
         return new HotelResource($createdHotel);        
     } 
 
-    public function update(HotelStoreRequest $request, Hotel $hotel)
+    public function update(HotelStoreRequest $request, HotelMethods $hotel)
     { 
-        $hotelId = $hotel->findOrFail($request->route('id')); 
+        $hotelId = $request->route('id');
+        $hotel = $hotel->findHotelId($hotelId); 
 
-        $hotelId->update($request->validated());  
+        $hotel->update($request->validated());  
 
         return new HotelResource($hotelId); 
     }

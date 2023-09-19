@@ -8,6 +8,8 @@ use App\Models\Service;
 use App\Models\Hotel;
 use App\Http\Resources\ServiceResource; 
 use App\Http\Requests\ServiceStoreRequest;
+use App\Services\Service\ServiceMethods;
+use App\Services\Hotel\HotelMethods;
 use App\Services\Service\ServiceStoreService;
 use Illuminate\Http\Response;
 
@@ -23,18 +25,13 @@ class ServiceController extends Controller
         return new ServiceResource(Service::findOrFail($id)); 
     }
 
-    public function store(ServiceStoreRequest $request)
+    public function store(ServiceStoreRequest $request, ServiceMethods $service, HotelMethods $hotel)
     {                              
-              
-       try{ 
-            $serviceCreate = (new ServiceStoreService())->store($request); 
-       }catch (HotelNotFoundException $exception) { 
-            return response()->json([
-                'error' => $exception->getMessage()
-           ], 400);  
-       }   
-       
-       return $serviceCreate;
+        $hotelId = $request->input('hotel_id');
+
+        $isHotelExists = $service->store($hotelId, $hotel); 
+         
+        return $service->create($request->validated());
                           
     } 
 
