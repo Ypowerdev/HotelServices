@@ -6,32 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Http\Resources\CountryResource; 
 use App\Http\Requests\CountryStoreRequest;
-use App\Services\Hotel\HotelMethods;
+use App\Services\Country\CountryMethods;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class CountryController extends Controller
 {
-    public function list()
+    public function list(CountryMethods $country)
     { 
-        return CountryResource::collection(Country::all());         
+        return $country->list();         
     }
 
-    public function show(int $id)
+    public function show(int $id, CountryMethods $country)
     { 
-        return new CountryResource(Country::findOrFail($id)); 
+        return new CountryResource($country->findCountryId($id)); 
     }
 
-    public function store(CountryStoreRequest $request)
+    public function store(CountryStoreRequest $request, CountryMethods $country)
     {                              
-        $createdCountry = Country::create($request->validated()); 
-
-        return new CountryResource($createdCountry);        
+       return $country->create($request->validated());             
     } 
 
     public function update(CountryStoreRequest $request, Country $country)
     { 
-        $countryId = $country->findOrFail($request->route('id')); 
+        $countryId = $country->findCountryId($request->route('id')); 
         $countryId->update($request->validated());  
 
         return new CountryResource($countryId); 
@@ -44,10 +42,4 @@ class CountryController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function getHotels(HotelMethods $hotelService): JsonResponse 
-    { 
-        $response = $hotelService->getActualHotels();
-
-        return new JsonResponse($response);
-    }
 }

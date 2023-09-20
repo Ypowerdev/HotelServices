@@ -2,20 +2,23 @@
 
 namespace App\Services\Service;
 
+use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Models\Hotel;
-use App\Http\Resources\ServiceResource; 
-use App\Http\Requests\ServiceStoreRequest;
-use App\Exceptions\HotelNotFoundException;
 use App\Services\Hotel\HotelMethods;
 
 class ServiceMethods
 { 
-    public function store ($hotelId, HotelMethods $hotel)   
+
+    public function list()
+    { 
+        return ServiceResource::collection($this->serviceAll());
+    }
+
+    public function store($hotelId, HotelMethods $hotel): Hotel  
     {                
         $hotel = $hotel->findHotelId($hotelId);         
-        return $hotel;    
-      
+        return $hotel;          
     }
 
     public function findServiceId(mixed $id): Service
@@ -28,8 +31,13 @@ class ServiceMethods
         return Service::create($data); 
     }
 
-    public function serviceAll()
+    public function serviceAll(): mixed 
     { 
         return Service::all();
+    }
+
+    public function serviceDelete()
+    { 
+        return (new Service)->delete();
     }
 }

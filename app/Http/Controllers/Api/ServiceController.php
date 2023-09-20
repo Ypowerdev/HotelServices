@@ -17,7 +17,7 @@ class ServiceController extends Controller
 {
     public function list(ServiceMethods $service)
     { 
-        return ServiceResource::collection($service->serviceAll());         
+        return $service->list();         
     }
 
     public function show(int $id, ServiceMethods $service)
@@ -34,16 +34,17 @@ class ServiceController extends Controller
                           
     } 
 
-    public function update(ServiceStoreRequest $request, Service $service)
+    public function update(ServiceStoreRequest $request, ServiceMethods $service)
     { 
-        $service->update($request->validated()); 
+        $serviceId = $service->findServiceId($request->route('id'));        
+        $serviceId->update($request->validated()); 
         
-        return new ServiceResource($service); 
+        return new ServiceResource($serviceId); 
     }
 
-    public function destroy(Service $service)
+    public function destroy(ServiceMethods $service)
     { 
-        $service->delete();
+        $service->serviceDelete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

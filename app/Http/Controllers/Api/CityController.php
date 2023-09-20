@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Services\Service\CityMethods;
+use App\Services\Country\CountryMethods;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Http\Resources\CityResource; 
@@ -10,27 +12,27 @@ use Illuminate\Http\Response;
 
 class CityController extends Controller
 {
-    public function list()
+    public function list(CityMethods $city)
     { 
-        return CityResource::collection(City::all());         
+        return $city->list();       
     }
 
-    public function show(int $id)
+    public function show(int $id, CityMethods $city)
     { 
-        return new CityResource(City::findOrFail($id)); 
+        return new CityResource($city->findCityId($id)); 
     }
 
-    public function store(CityStoreRequest $request)
+    public function store(CityStoreRequest $request, CityMethods $city, CountryMethods $country)
     {                              
-        $createdCity = City::create($request->validated()); 
-        
-        return new CityResource($createdCity);        
+        $countryId = $request->input('country_id');
+        $isCountryExists = $city->findCountryId($countryId, $country);
+                  
+        return $city->create($request->validated());                          
     } 
 
-    public function update(CityStoreRequest $request, City $city)
+    public function update(CityStoreRequest $request, CityMethods $city)
     { 
-        $cityId = $city->findOrFail($request->route('id')); 
-
+        $cityId = $city->findCityId($request->route('id')); 
         $cityId->update($request->validated());  
 
         return new CityResource($cityId); 
@@ -38,7 +40,7 @@ class CityController extends Controller
 
     public function destroy(City $city)
     { 
-        $city->delete();
+        $city->cityDelete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
