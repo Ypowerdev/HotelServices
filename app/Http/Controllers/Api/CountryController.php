@@ -27,7 +27,7 @@ class CountryController extends Controller
        return $country->create($request->validated());             
     } 
 
-    public function update(CountryStoreRequest $request, Country $country)
+    public function update(CountryStoreRequest $request, CountryMethods $country)
     { 
         $countryId = $country->findCountryId($request->route('id')); 
         $countryId->update($request->validated());  

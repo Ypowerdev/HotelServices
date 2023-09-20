@@ -32,7 +32,6 @@ class HotelController extends Controller
     { 
         $hotelId = $request->route('id');
         $hotel = $hotel->findHotelId($hotelId); 
-
         $hotel->update($request->validated());  
 
         return new HotelResource($hotelId); 
