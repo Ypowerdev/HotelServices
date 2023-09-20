@@ -7,7 +7,6 @@ use App\Models\Country;
 use App\Http\Resources\CountryResource; 
 use App\Http\Requests\CountryStoreRequest;
 use App\Services\Country\CountryMethods;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class CountryController extends Controller

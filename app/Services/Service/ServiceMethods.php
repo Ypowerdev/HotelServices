@@ -15,7 +15,7 @@ class ServiceMethods
         return ServiceResource::collection($this->serviceAll());
     }
 
-    public function store($hotelId, HotelMethods $hotel): Hotel  
+    public function findHotel(mixed $hotelId, HotelMethods $hotel): Hotel  
     {                
         $hotel = $hotel->findHotelId($hotelId);         
         return $hotel;          

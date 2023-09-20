@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\Service\CityMethods;
+use App\Services\City\CityMethods;
 use App\Services\Country\CountryMethods;
 use App\Http\Controllers\Controller;
 use App\Models\City;
@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 
 class CityController extends Controller
 {
+    
     public function list(CityMethods $city)
     { 
         return $city->list();       
@@ -25,7 +26,7 @@ class CityController extends Controller
     public function store(CityStoreRequest $request, CityMethods $city, CountryMethods $country)
     {                              
         $countryId = $request->input('country_id');
-        $isCountryExists = $city->findCountryId($countryId, $country);
+        $isCountryExists = $city->findCountry($countryId, $country);
                   
         return $city->create($request->validated());                          
     } 
@@ -41,6 +42,7 @@ class CityController extends Controller
     public function destroy(City $city)
     { 
         $city->cityDelete();
+
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

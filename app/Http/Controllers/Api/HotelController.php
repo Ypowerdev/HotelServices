@@ -8,12 +8,13 @@ use App\Http\Resources\HotelResource;
 use App\Http\Requests\HotelStoreRequest; 
 use Illuminate\Http\Response;
 use App\Services\Hotel\HotelMethods;
+use App\Services\City\CityMethods;
 
 class HotelController extends Controller
 {
-    public function list()
+    public function list(HotelMethods $hotel)
     { 
-        return HotelResource::collection(Hotel::all());         
+        return $hotel->list();         
     }
 
     public function show(int $id, HotelMethods $hotel )
@@ -21,11 +22,12 @@ class HotelController extends Controller
         return new HotelResource($hotel->findHotelId($id)); 
     }
 
-    public function store(HotelStoreRequest $request)
+    public function store(HotelStoreRequest $request, HotelMethods $hotel, CityMethods $city)
     {                              
-        $createdHotel = Hotel::create($request->validated()); 
-
-        return new HotelResource($createdHotel);        
+        $cityId = $request->input('city_id');
+        $isCityExists = $city->findCityId($cityId, $city);
+                  
+        return $hotel->create($request->validated());                          
     } 
 
     public function update(HotelStoreRequest $request, HotelMethods $hotel)
@@ -37,9 +39,9 @@ class HotelController extends Controller
         return new HotelResource($hotelId); 
     }
 
-    public function destroy(Hotel $hotel)
+    public function destroy(HotelMethods $hotel)
     { 
-        $hotel->delete();
+        $hotel->Hoteldelete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

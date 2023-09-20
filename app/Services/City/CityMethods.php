@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Services\Service;
+namespace App\Services\City;
 
 use App\Http\Resources\CityResource; 
 use App\Models\City;
@@ -15,15 +15,15 @@ class CityMethods
         return CityResource::collection($this->cityAll());
     }
 
+    public function findCountry(mixed $countryId, CountryMethods $country): Country
+    {                
+        $country = $country->findCountryId($countryId);             
+        return $country;          
+    }
+
     public function create(array $data): mixed 
     { 
         return CityResource::collection($data);
-    }
-
-    public function findCountryId($countryId, CountryMethods $country): Country  
-    {                
-        $country = $country->findCountryId($countryId);         
-        return $country;          
     }
 
     public function findCityId(mixed $id): City

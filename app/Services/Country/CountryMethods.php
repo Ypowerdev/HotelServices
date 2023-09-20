@@ -5,7 +5,6 @@ namespace App\Services\Country;
 use App\Http\Resources\CountryResource; 
 use App\Models\Country;
 
-
 class CountryMethods
 { 
 
