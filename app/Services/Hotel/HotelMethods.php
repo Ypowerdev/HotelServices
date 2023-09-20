@@ -23,7 +23,7 @@ class HotelMethods
         return $city;          
     }
 
-    public function create(array $data): mixed 
+    public function create($data): mixed 
     { 
         return HotelResource::collection($data);
     }

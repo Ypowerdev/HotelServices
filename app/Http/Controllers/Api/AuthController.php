@@ -29,10 +29,7 @@ class AuthController extends Controller
                 'message' => 'Invalid credentials'
            ], Response::HTTP_UNAUTHORIZED);  
        }     
-       
-        /**
-         * @var User $user
-         */        
+                  
         $user = Auth::user(); 
         $token = $user->createToken('token')->plainTextToken;
         

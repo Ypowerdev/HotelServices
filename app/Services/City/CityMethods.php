@@ -21,9 +21,9 @@ class CityMethods
         return $country;          
     }
 
-    public function create(array $data): mixed 
+    public function create($data): City
     { 
-        return CityResource::collection($data);
+        return City::create($data); 
     }
 
     public function findCityId(mixed $id): City
