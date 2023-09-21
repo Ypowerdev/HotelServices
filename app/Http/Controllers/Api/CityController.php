@@ -33,10 +33,12 @@ class CityController extends Controller
 
     public function update(CityStoreRequest $request, CityMethods $city)
     { 
-        $cityId = $city->findCityId($request->route('id')); 
-        $cityId->update($request->validated());  
-
-        return new CityResource($cityId); 
+        return new CityResource( 
+            $city->update(
+                $request->route('id'),
+                $request->validated()
+            )
+        );      
     }
 
     public function destroy(City $city)

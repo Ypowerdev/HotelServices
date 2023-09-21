@@ -30,13 +30,16 @@ class HotelController extends Controller
         return $hotel->create($request->validated());                          
     } 
 
+    
     public function update(HotelStoreRequest $request, HotelMethods $hotel)
     { 
-        $hotelId = $request->route('id');
-        $hotel = $hotel->findHotelId($hotelId); 
-        $hotel->update($request->validated());  
-
-        return new HotelResource($hotelId); 
+        return new HotelResource( 
+            $hotel->update(
+                $request->route('id'),
+                $request->validated()
+            )
+        );
+      
     }
 
     public function destroy(HotelMethods $hotel)
@@ -45,4 +48,5 @@ class HotelController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
 }

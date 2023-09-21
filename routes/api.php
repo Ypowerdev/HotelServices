@@ -41,7 +41,7 @@ Route::get('/countries',[CountryController::class, 'list']);
 Route::get('/countries/{id}',[CountryController::class, 'show']);
 Route::post('/countries', [CountryController::class, 'store']);
 Route::put('/countries/{id}', [CountryController::class, 'update']);
-Route::get('/country/hotels',[CountryController::class, 'getHotels']);
+Route::get('/country/hotels',[CountryController::class, 'getActualHotels']);
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');

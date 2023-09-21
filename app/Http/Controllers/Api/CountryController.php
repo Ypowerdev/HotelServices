@@ -7,6 +7,8 @@ use App\Models\Country;
 use App\Http\Resources\CountryResource; 
 use App\Http\Requests\CountryStoreRequest;
 use App\Services\Country\CountryMethods;
+use App\Services\Hotel\HotelMethods;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class CountryController extends Controller
@@ -25,13 +27,22 @@ class CountryController extends Controller
     {                              
        return $country->create($request->validated());             
     } 
-
+    
     public function update(CountryStoreRequest $request, CountryMethods $country)
     { 
-        $countryId = $country->findCountryId($request->route('id')); 
-        $countryId->update($request->validated());  
+        return new CountryResource( 
+            $country->update(
+                $request->route('id'),
+                $request->validated()
+            )
+        );      
+    }
 
-        return new CountryResource($countryId); 
+    public function getActualHotels(HotelMethods $hotel): JsonResponse
+    { 
+        $response = $hotel->getActualHotels();
+
+        return new JsonResponse($response);
     }
 
     public function destroy(Country $country)

@@ -15,7 +15,15 @@ class CountryMethods
 
     public function create($data): mixed 
     { 
-        return CountryResource::collection($data);
+        return Country::create($data);
+    }
+
+    public function update($id, array $data)
+    { 
+        $country = $this->findCountryId($id);
+        $country->update($data);
+
+        return $country;
     }
 
     public function findCountryId(mixed $id): Country

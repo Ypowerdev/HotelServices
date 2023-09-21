@@ -2,9 +2,7 @@
 
 namespace App\Services\Order;
 
-use App\Http\Requests\ServiceStoreRequest;
 use App\Models\Order; 
-use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\OrderResource; 
 use App\Notifications\Telegram;

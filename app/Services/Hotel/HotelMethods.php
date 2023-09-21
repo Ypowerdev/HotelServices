@@ -25,7 +25,15 @@ class HotelMethods
 
     public function create($data): mixed 
     { 
-        return HotelResource::collection($data);
+        return Hotel::create($data);
+    }
+
+    public function update($id, array $data)
+    { 
+        $hotel = $this->findHotelId($id);
+        $hotel->update($data);
+
+        return $hotel;
     }
 
     public function findHotelId(mixed $id): Hotel
@@ -52,12 +60,11 @@ class HotelMethods
                foreach ($city->hotels as $hotel){ 
                 if(!isset($response[$country->country_code][$city->name])){ 
                     $result[$country->country_code][$city->name] = [];
-                }
-                $result[$country->country_code][$city->name][] = $hotel;
-               }
-            }
+                }        
+                $result[$country->country_code][$city->name][] = $hotel;        
+               }              
+            }           
         }
         return $result;
-    } 
-    
+    }     
 }

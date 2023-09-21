@@ -9,10 +9,10 @@ use Illuminate\Http\JsonResponse;
 
 class OrdersController extends Controller
 {
-    public function store(OrderStoreRequest $request, OrderMethods $crud)
+    public function store(OrderStoreRequest $request, OrderMethods $order)
     { 
         $data = $request->validated(); 
-        $crud->store($data);  
+        $order->store($data);  
         return new JsonResponse();  
     }   
 }

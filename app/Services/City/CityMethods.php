@@ -35,6 +35,14 @@ class CityMethods
     { 
         return City::all();
     }
+
+    public function update($id, array $data)
+    { 
+        $city = $this->findCityId($id);
+        $city->update($data);
+
+        return $city;
+    }
    
     public function cityDelete ()
     { 
