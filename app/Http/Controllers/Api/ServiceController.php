@@ -21,7 +21,7 @@ class ServiceController extends Controller
 
     public function list()
     { 
-        return $this->service->list();         
+        return ServiceResource::collection($this->service->list());         
     }
 
     public function show(int $id)

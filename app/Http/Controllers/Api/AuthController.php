@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
-    public function register(UserStoreRequest $request)
+    public function register(UserStoreRequest $request): User 
     { 
         return User::create([
             'name' => $request->input('name'),  

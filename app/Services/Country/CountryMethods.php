@@ -3,33 +3,29 @@
 namespace App\Services\Country;
 
 use App\Models\Country;
+use Illuminate\Database\Eloquent\Collection;
 
 class CountryMethods
 { 
 
-    public function list()
+    public function list(): Collection
     { 
-        return $this->countryAll();
+        return Country::all();
     }
 
-    public function create($data): mixed 
+    public function create($data): Country 
     { 
         return Country::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($id, array $data): Country 
     { 
         $country = $this->findCountryId($id);
         $country->update($data);
 
         return $country;
     }
-
-    public function countryAll(): mixed
-    { 
-        return Country::all();
-    }
-
+   
     public function findCountryId(mixed $id): Country
     { 
         return Country::findOrFail($id);  

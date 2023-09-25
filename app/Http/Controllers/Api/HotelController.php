@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hotel;
 use App\Http\Resources\HotelResource; 
 use App\Http\Requests\HotelStoreRequest; 
 use Illuminate\Http\Response;
@@ -21,7 +20,7 @@ class HotelController extends Controller
 
     public function list()
     { 
-        return $this->hotelService->list();         
+        return HotelResource::collection($this->hotelService->list());         
     }
 
     public function show(int $id)
