@@ -15,25 +15,27 @@ class ServiceMethods
         return ServiceResource::collection($this->serviceAll());
     }
 
-    public function findHotel(mixed $hotelId, HotelMethods $hotel): Hotel  
-    {                
-        $hotel = $hotel->findHotelId($hotelId);         
-        return $hotel;          
-    }
-
-    public function findServiceId(mixed $id): Service
-    { 
-        return Service::findOrFail($id);  
-    }
-
     public function create($data): Service
     { 
         return Service::create($data); 
     }
 
+    public function update($id, array $data)
+    { 
+        $service = $this->findServiceId($id);
+        $service->update($data);
+
+        return $service;
+    }
+
     public function serviceAll(): mixed 
     { 
         return Service::all();
+    }
+
+    public function findServiceId(mixed $id): Service
+    { 
+        return Service::findOrFail($id);  
     }
 
     public function serviceDelete()

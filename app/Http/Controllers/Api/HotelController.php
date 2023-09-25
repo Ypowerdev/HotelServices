@@ -12,39 +12,44 @@ use App\Services\City\CityMethods;
 
 class HotelController extends Controller
 {
-    public function list(HotelMethods $hotel)
-    { 
-        return $hotel->list();         
+    public function __construct(
+    private HotelMethods $hotelService, 
+    private CityMethods $cityService
+    )
+    {
     }
 
-    public function show(int $id, HotelMethods $hotel )
+    public function list()
     { 
-        return new HotelResource($hotel->findHotelId($id)); 
+        return $this->hotelService->list();         
     }
 
-    public function store(HotelStoreRequest $request, HotelMethods $hotel, CityMethods $city)
+    public function show(int $id)
+    { 
+        return new HotelResource($this->hotelService->findHotelId($id)); 
+    }
+
+    public function store(HotelStoreRequest $request)
     {                              
         $cityId = $request->input('city_id');
-        $isCityExists = $city->findCityId($cityId, $city);
+        $isCityExists = $this->cityService->findCityId($cityId);
                   
-        return $hotel->create($request->validated());                          
+        return $this->hotelService->create($request->validated());                          
     } 
-
     
-    public function update(HotelStoreRequest $request, HotelMethods $hotel)
+    public function update(HotelStoreRequest $request)
     { 
         return new HotelResource( 
-            $hotel->update(
+            $this->hotelService->update(
                 $request->route('id'),
                 $request->validated()
             )
-        );
-      
+        );      
     }
 
-    public function destroy(HotelMethods $hotel)
+    public function destroy()
     { 
-        $hotel->Hoteldelete();
+        $this->hotelService->hotelDelete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

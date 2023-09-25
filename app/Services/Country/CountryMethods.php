@@ -2,7 +2,6 @@
 
 namespace App\Services\Country;
 
-use App\Http\Resources\CountryResource; 
 use App\Models\Country;
 
 class CountryMethods
@@ -10,7 +9,7 @@ class CountryMethods
 
     public function list()
     { 
-        return CountryResource::collection($this->countryAll());
+        return $this->countryAll();
     }
 
     public function create($data): mixed 
@@ -26,17 +25,17 @@ class CountryMethods
         return $country;
     }
 
-    public function findCountryId(mixed $id): Country
-    { 
-        return Country::findOrFail($id);  
-    }
-   
     public function countryAll(): mixed
     { 
         return Country::all();
     }
-   
-    public function delete()
+
+    public function findCountryId(mixed $id): Country
+    { 
+        return Country::findOrFail($id);  
+    }
+     
+    public function countryDelete()
     { 
         return (new Country)->delete();
     }
