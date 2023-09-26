@@ -11,36 +11,46 @@ use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
-    public function list(ServiceMethods $service)
-    { 
-        return $service->list();         
+
+    public function __construct(
+        private ServiceMethods $service, 
+        private HotelMethods $hotelService
+    )
+    {        
     }
 
-    public function show(int $id, ServiceMethods $service)
+    public function list()
     { 
-        return new ServiceResource($service->findServiceId($id)); 
+        return ServiceResource::collection($this->service->list());         
     }
 
-    public function store(ServiceStoreRequest $request, ServiceMethods $service, HotelMethods $hotel)
+    public function show(int $id)
+    { 
+        return new ServiceResource($this->service->findServiceId($id)); 
+    }
+
+    public function store(ServiceStoreRequest $request)
     {                              
         $hotelId = $request->input('hotel_id');
-        $isHotelExists = $service->findHotel($hotelId, $hotel);
+        $isHotelExists = $this->hotelService->findHotelId($hotelId);
                   
-        return $service->create($request->validated());
+        return $this->service->create($request->validated());
                           
     } 
 
-    public function update(ServiceStoreRequest $request, ServiceMethods $service)
+    public function update(ServiceStoreRequest $request)
     { 
-        $serviceId = $service->findServiceId($request->route('id'));        
-        $serviceId->update($request->validated()); 
-        
-        return new ServiceResource($serviceId); 
+        return new ServiceResource( 
+            $this->service->update(
+                $request->route('id'),
+                $request->validated()
+            )
+        );      
     }
 
-    public function destroy(ServiceMethods $service)
+    public function destroy()
     { 
-        $service->serviceDelete();
+        $this->service->serviceDelete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
