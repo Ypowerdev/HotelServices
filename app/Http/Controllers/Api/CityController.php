@@ -33,7 +33,11 @@ class CityController extends Controller
         $countryId = $request->input('country_id');
         $isCountryExists = $this->countryService->findCountryId($countryId);
                   
-        return $this->cityService->create($request->validated());                          
+        return new CityResource(
+            $this->cityService->create(
+                $request->validated()
+            )
+        );                          
     } 
 
     public function update(CityStoreRequest $request)
