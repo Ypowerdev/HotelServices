@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+
 
 class AuthController extends Controller
 {
@@ -42,18 +42,21 @@ class AuthController extends Controller
         return new JsonResponse($response, 200);
     }
 
-    public function user()
+    public function user(): User
     { 
         return Auth::user(); 
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {         
-        /**
-        * TODO: реализовать logout 
-        */
+        $user = Auth::user(); 
+
+        $user->tokens->each(function ($token, $key) { 
+            $token->delete();
+        });
+        
         return new JsonResponse([
-            'message' => 'Success'
+            'message' => 'Logged out successfully'
         ]);    
     }
 

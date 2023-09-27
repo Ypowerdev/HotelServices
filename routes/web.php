@@ -14,10 +14,3 @@ use Illuminate\Support\Facades\Http;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {   
-});
-
-//Route::get('/addservice',[DataViewController::class, 'viewTable']);
-Route::get('/addservice',[DataViewController::class, 'viewTable']);
-Route::post('/addservice',[DataViewController::class, 'store']);
