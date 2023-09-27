@@ -29,10 +29,6 @@ class CountryMethods
     public function findCountryId(mixed $id): Country
     { 
         return Country::findOrFail($id);  
-    }
-     
-    public function countryDelete()
-    { 
-        return (new Country)->delete();
-    }
+    }     
+   
 }

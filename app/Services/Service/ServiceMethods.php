@@ -31,8 +31,4 @@ class ServiceMethods
         return Service::findOrFail($id);  
     }
 
-    public function serviceDelete()
-    { 
-        return (new Service)->delete();
-    }
 }

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CityResource; 
 use App\Http\Requests\CityStoreRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class CityController extends Controller
 {
@@ -51,10 +51,20 @@ class CityController extends Controller
         );      
     }
 
-    public function destroy()
+    public function destroy(int $id): JsonResponse
     { 
-        $this->cityService->cityDelete();
+        $city = $this->cityService->findCityId($id);
+        
+        if(!$city){ 
+            return new JsonResponse([
+               'message' => 'City has not been found' 
+            ], 404);
+        }
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        $city->delete();
+
+        return new JsonResponse([
+            'message' => 'City deleted successfully' 
+         ], 200);        
     }
 }

@@ -30,11 +30,6 @@ class HotelMethods
     public function findHotelId(mixed $id): Hotel
     { 
         return Hotel::findOrFail($id);
-    }
-   
-    public function hotelDelete()
-    { 
-        return (new Hotel)->delete();
-    }    
-   
+    }   
+     
 }

@@ -30,9 +30,5 @@ class CityMethods
     { 
         return City::findOrFail($id);  
     }
-      
-    public function cityDelete()
-    { 
-        return (new City)->delete();
-    }
+         
 }
