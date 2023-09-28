@@ -13,7 +13,7 @@ class Hotel extends Model
         'adress',
         'coordinates', 
         'city_id',
-         'name'
+        'name',
     ];
 
     public $timestamps = false;

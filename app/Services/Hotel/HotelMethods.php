@@ -14,12 +14,12 @@ class HotelMethods
         return Hotel::all();
     }
     
-    public function create($data): Hotel 
+    public function create(array $data): Hotel 
     { 
         return Hotel::create($data);
     }
 
-    public function update($id, array $data): Hotel 
+    public function update(int $id, array $data): Hotel 
     { 
         $hotel = $this->findHotelId($id);
         $hotel->update($data);
@@ -27,7 +27,7 @@ class HotelMethods
         return $hotel;
     }
   
-    public function findHotelId(mixed $id): Hotel
+    public function findHotelId(int $id): Hotel
     { 
         return Hotel::findOrFail($id);
     }   

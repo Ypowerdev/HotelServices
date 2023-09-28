@@ -13,12 +13,12 @@ class ServiceMethods
         return Service::all();
     }
 
-    public function create($data): Service
+    public function create(array $data): Service
     { 
         return Service::create($data); 
     }
 
-    public function update($id, array $data): Service
+    public function update(int $id, array $data): Service
     { 
         $service = $this->findServiceId($id);
         $service->update($data);
@@ -26,7 +26,7 @@ class ServiceMethods
         return $service;
     }
 
-    public function findServiceId(mixed $id): Service
+    public function findServiceId(int $id): Service
     { 
         return Service::findOrFail($id);  
     }

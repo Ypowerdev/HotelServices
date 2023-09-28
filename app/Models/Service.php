@@ -11,7 +11,7 @@ class Service extends Model
         'name', 
         'price', 
         'hotel_id', 
-        'parent_id'
+        'parent_id',
     ];
     
     public $timestamps = false;
