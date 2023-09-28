@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\NotFoundException;
 use App\Services\City\CityMethods;
 use App\Services\Country\CountryMethods;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,7 @@ use App\Http\Resources\CityResource;
 use App\Http\Requests\CityStoreRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\JsonResponse;
+
 
 class CityController extends Controller
 {
@@ -33,6 +35,10 @@ class CityController extends Controller
     {                              
         $countryId = $request->input('country_id');
         $isCountryExists = $this->countryService->findCountryId($countryId);
+
+        if(!$isCountryExists){ 
+            throw new NotFoundException('Country is not found');
+        }
                   
         return new CityResource(
             $this->cityService->create(

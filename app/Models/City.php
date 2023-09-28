@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Country;
+use App\Models\Hotel;
 
 
 class City extends Model
@@ -18,6 +20,6 @@ class City extends Model
 
     public function hotels()
     { 
-        return $this->hasMany(Hotel::class, 'hotel_id', 'id');        
+        return $this->hasMany(Hotel::class, 'city_id', 'id');        
     }
 }

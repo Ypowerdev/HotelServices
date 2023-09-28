@@ -34,7 +34,11 @@ class ServiceController extends Controller
         $hotelId = $request->input('hotel_id');
         $isHotelExists = $this->hotelService->findHotelId($hotelId);
                   
-        return $this->service->create($request->validated());
+        return new ServiceResource(
+            $this->service->create(
+                $request->validated()
+            )
+        );
                           
     } 
 

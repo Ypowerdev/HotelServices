@@ -33,8 +33,12 @@ class HotelController extends Controller
         $cityId = $request->input('city_id');
         $isCityExists = $this->cityService->findCityId($cityId);
                   
-        return $this->hotelService->create($request->validated());                          
-    } 
+        return new HotelResource(
+            $this->hotelService->create(
+                $request->validated()
+            )    
+        );                     
+    }   
     
     public function update(HotelStoreRequest $request)
     { 
