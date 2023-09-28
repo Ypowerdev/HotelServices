@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CountryResource; 
 use App\Http\Requests\CountryStoreRequest;
 use App\Services\Country\CountryMethods;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class CountryController extends Controller
 {
@@ -37,13 +37,24 @@ class CountryController extends Controller
                 $request->validated()
             )
         );      
-    }
-   
-    public function destroy()
+    }   
+    
+    public function destroy(int $id): JsonResponse
     { 
-        $this->countryService->countryDelete();
+        $country = $this->countryService->findCountryId($id);
+        
+        if(!$country){ 
+            return new JsonResponse([
+               'message' => 'Country has not been found' 
+            ], 404);
+        }
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        $country->delete();
+
+        return new JsonResponse([
+            'message' => 'Country deleted successfully' 
+         ], 200);        
     }
-
 }
+
+

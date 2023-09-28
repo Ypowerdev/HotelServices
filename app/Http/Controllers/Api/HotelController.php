@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HotelResource; 
 use App\Http\Requests\HotelStoreRequest; 
-use Illuminate\Http\Response;
 use App\Services\Hotel\HotelMethods;
 use App\Services\City\CityMethods;
+use Illuminate\Http\JsonResponse;
 
 class HotelController extends Controller
 {
     public function __construct(
-    private HotelMethods $hotelService, 
-    private CityMethods $cityService
+        private HotelMethods $hotelService, 
+        private CityMethods $cityService
     )
     {
     }
@@ -45,12 +45,22 @@ class HotelController extends Controller
             )
         );      
     }
-
-    public function destroy()
+   
+    public function destroy(int $id): JsonResponse
     { 
-        $this->hotelService->hotelDelete();
+        $hotel = $this->hotelService->findHotelId($id);
+        
+        if(!$hotel){ 
+            return new JsonResponse([
+               'message' => 'Hotel has not been found' 
+            ], 404);
+        }
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        $hotel->delete();
+
+        return new JsonResponse([
+            'message' => 'Hotel deleted successfully' 
+         ], 200);        
     }
 
 }

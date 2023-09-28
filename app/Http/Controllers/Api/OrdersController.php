@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class OrdersController extends Controller
 {
-    public function store(OrderStoreRequest $request, OrderMethods $order)
+    public function store(OrderStoreRequest $request, OrderMethods $order): JsonResponse
     { 
         $data = $request->validated(); 
         $order->store($data);  

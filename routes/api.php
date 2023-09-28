@@ -31,6 +31,7 @@ Route::get('/hotels',[HotelController::class, 'list']);
 Route::get('/hotels/{id}',[HotelController::class, 'show']);
 Route::post('/hotels', [HotelController::class, 'store']);
 Route::put('/hotels/{id}', [HotelController::class, 'update']);
+Route::delete('/hotels/{id}', [HotelController::class, 'destroy']);
 
 Route::get('/cities',[CityController::class, 'list']);
 Route::get('/cities/{id}',[CityController::class, 'show']);
@@ -42,7 +43,8 @@ Route::get('/countries',[CountryController::class, 'list']);
 Route::get('/countries/{id}',[CountryController::class, 'show']);
 Route::post('/countries', [CountryController::class, 'store']);
 Route::put('/countries/{id}', [CountryController::class, 'update']);
-Route::get('/country/hotels',[CountryController::class, 'getActualHotels']);
+Route::delete('/countries/{id}', [CountryController::class, 'destroy']);
+
 
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
