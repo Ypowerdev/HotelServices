@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DataViewController;
-use Illuminate\Support\Facades\Http; 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -15,7 +15,7 @@ class OrderStoreRequest extends BaseApiFormRequest
     public function rules(): array
     {
         return [
-            'service_id' => 'required|integer'           
+            'service_id' => 'required|integer',           
         ];
     }
 }

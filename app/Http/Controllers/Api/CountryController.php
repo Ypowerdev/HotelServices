@@ -27,9 +27,9 @@ class CountryController extends Controller
     public function store(CountryStoreRequest $request)
     {                              
        return new CountryResource(
-         $this->countryService->create(
-             $request->validated()
-         )
+            $this->countryService->create(
+                $request->validated()
+            )
        );             
     } 
     
@@ -57,7 +57,7 @@ class CountryController extends Controller
 
         return new JsonResponse([
             'message' => 'Country deleted successfully' 
-         ], 200);        
+        ], 200);        
     }
 }
 

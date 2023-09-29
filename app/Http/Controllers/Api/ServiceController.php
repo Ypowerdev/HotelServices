@@ -38,8 +38,7 @@ class ServiceController extends Controller
             $this->service->create(
                 $request->validated()
             )
-        );
-                          
+        );                          
     } 
 
     public function update(ServiceStoreRequest $request)
@@ -66,7 +65,7 @@ class ServiceController extends Controller
 
         return new JsonResponse([
             'message' => 'Service deleted successfully' 
-         ], 200);        
+        ], 200);        
     }
 
 }

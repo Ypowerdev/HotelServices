@@ -19,6 +19,6 @@ class OrdersController extends Controller
         $this->orderService->store($data);  
         return new JsonResponse([
             'message' => 'Service with ID ' . $this->orderService->order->id.  ' provided  successfully' 
-         ], 200);         
+        ], 200);         
     }   
 }

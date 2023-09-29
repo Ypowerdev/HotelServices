@@ -64,7 +64,6 @@ class HotelController extends Controller
 
         return new JsonResponse([
             'message' => 'Hotel deleted successfully' 
-         ], 200);        
+        ], 200);        
     }
-
 }

@@ -29,6 +29,5 @@ class CountryMethods
     public function findCountryId(int $id): Country
     { 
         return Country::findOrFail($id);  
-    }     
-   
+    }        
 }

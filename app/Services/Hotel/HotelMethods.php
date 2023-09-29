@@ -3,7 +3,6 @@
 namespace App\Services\Hotel;
 
 use App\Models\Hotel;
-use App\Http\Resources\HotelResource;
 use Illuminate\Database\Eloquent\Collection;
 
 class HotelMethods

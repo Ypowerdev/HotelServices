@@ -17,7 +17,7 @@ class ServiceStoreRequest extends BaseApiFormRequest
         return [
             'name' => 'required|string|min:2|max:20', 
             'price' => 'required|numeric',
-            'hotel_id' => 'required|integer'
+            'hotel_id' => 'required|integer', 
         ];
     }
 }

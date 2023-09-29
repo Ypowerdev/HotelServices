@@ -39,8 +39,7 @@ class AuthController extends Controller
            ], Response::HTTP_UNAUTHORIZED);  
         }     
                   
-        $user = $this->userService->showAuthUser();  
-        $token = $user->createToken('token')->plainTextToken;
+        $token = $this->userService->createToken();
         
         $response = [ 
             'message' => 'Success', 
@@ -57,11 +56,7 @@ class AuthController extends Controller
 
     public function logout(): JsonResponse
     {         
-        $user = $this->userService->showAuthUser(); ; 
-
-        $user->tokens->each(function ($token, $key) { 
-            $token->delete();
-        });
+        $this->userService->deleteToken();
         
         return new JsonResponse([
             'message' => 'Logged out successfully'

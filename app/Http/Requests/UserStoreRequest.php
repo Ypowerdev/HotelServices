@@ -17,7 +17,7 @@ class UserStoreRequest extends BaseApiFormRequest
         return [
             'name' => 'required|string|min:3|max:20', 
             'email' => 'required|string|email',
-            'password' => 'required|string|min:5|max:20'
+            'password' => 'required|string|min:5|max:20',
         ];
     }
 }

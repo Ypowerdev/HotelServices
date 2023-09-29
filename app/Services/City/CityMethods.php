@@ -8,7 +8,6 @@ use App\Http\Requests\CityStoreRequest;
 
 class CityMethods
 { 
-
     public function list(): Collection
     { 
         return City::all();
@@ -30,6 +29,5 @@ class CityMethods
     public function findCityId(int $id): City
     { 
         return City::findOrFail($id);  
-    }
-         
+    }         
 }

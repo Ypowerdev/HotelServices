@@ -15,11 +15,10 @@ class HotelStoreRequest extends BaseApiFormRequest
     public function rules(): array
     {
         return [
-
             'adress' => 'required|string|min:5|max:40',
             'coordinates' => 'required|numeric',
             'city_id' => 'required|integer',
-            'name' => 'required|string'
+            'name' => 'required|string',
         ];
     }
 }
