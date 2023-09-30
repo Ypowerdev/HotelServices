@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DataViewController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +10,3 @@ use App\Http\Controllers\DataViewController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/table',[DataViewController::class, 'viewTable']);
-Route::get('/addservice',[DataViewController::class, 'viewaAddForm']);
-Route::post('/addservice',[DataViewController::class, 'store']);

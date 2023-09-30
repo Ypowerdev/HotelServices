@@ -1,0 +1,1 @@
+Hotel with this ID has not been found
