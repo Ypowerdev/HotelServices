@@ -18,9 +18,9 @@ use App\Http\Controllers\Api\CountryController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::get('/services',[ServiceController::class, 'list']);
 Route::get('/services/{id}',[ServiceController::class, 'show']);

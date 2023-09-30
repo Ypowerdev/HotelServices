@@ -26,8 +26,8 @@ class CountryMethods
         return $country;
     }
    
-    public function findCountryId(int $id): Country
+    public function findCountryId(int $id): ?Country
     { 
-        return Country::findOrFail($id);  
+        return Country::find($id);  
     }        
 }

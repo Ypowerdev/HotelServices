@@ -36,7 +36,7 @@ class CityController extends Controller
         $countryId = $request->input('country_id');
         $isCountryExists = $this->countryService->findCountryId($countryId);
 
-        if(!$isCountryExists){ 
+        if(!$isCountryExists){          
             throw new NotFoundException('Country is not found');
         }
                   
@@ -71,6 +71,6 @@ class CityController extends Controller
 
         return new JsonResponse([
             'message' => 'City deleted successfully' 
-         ], 200);        
+        ], 200);        
     }
 }
