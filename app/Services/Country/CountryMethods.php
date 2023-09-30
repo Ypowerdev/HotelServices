@@ -13,12 +13,12 @@ class CountryMethods
         return Country::all();
     }
 
-    public function create($data): Country 
+    public function create(array $data): Country 
     { 
         return Country::create($data);
     }
 
-    public function update($id, array $data): Country 
+    public function update(int $id, array $data): Country 
     { 
         $country = $this->findCountryId($id);
         $country->update($data);
@@ -26,13 +26,8 @@ class CountryMethods
         return $country;
     }
    
-    public function findCountryId(mixed $id): Country
+    public function findCountryId(int $id): Country
     { 
         return Country::findOrFail($id);  
-    }
-     
-    public function countryDelete()
-    { 
-        return (new Country)->delete();
-    }
+    }        
 }

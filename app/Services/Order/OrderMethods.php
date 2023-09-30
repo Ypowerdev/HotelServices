@@ -12,7 +12,7 @@ class OrderMethods
 
 { 
     public function __construct(
-        private Order $order, 
+        public Order $order, 
         private ServiceMethods $service, 
         private Telegram $telegram
     )

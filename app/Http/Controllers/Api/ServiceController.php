@@ -7,7 +7,7 @@ use App\Http\Resources\ServiceResource;
 use App\Http\Requests\ServiceStoreRequest;
 use App\Services\Service\ServiceMethods;
 use App\Services\Hotel\HotelMethods;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 class ServiceController extends Controller
 {
@@ -34,8 +34,11 @@ class ServiceController extends Controller
         $hotelId = $request->input('hotel_id');
         $isHotelExists = $this->hotelService->findHotelId($hotelId);
                   
-        return $this->service->create($request->validated());
-                          
+        return new ServiceResource(
+            $this->service->create(
+                $request->validated()
+            )
+        );                          
     } 
 
     public function update(ServiceStoreRequest $request)
@@ -48,10 +51,21 @@ class ServiceController extends Controller
         );      
     }
 
-    public function destroy()
+    public function destroy(int $id): JsonResponse
     { 
-        $this->service->serviceDelete();
+        $service = $this->service->findServiceId($id);
+        
+        if(!$service){ 
+            return new JsonResponse([
+               'message' => 'Service has not been found' 
+            ], 404);
+        }
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        $service->delete();
+
+        return new JsonResponse([
+            'message' => 'Service deleted successfully' 
+        ], 200);        
     }
+
 }

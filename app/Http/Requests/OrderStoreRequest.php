@@ -2,18 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseApiFormRequest;
 
-class OrderStoreRequest extends FormRequest
+class OrderStoreRequest extends BaseApiFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +15,7 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'service_id' => 'required|integer'           
+            'service_id' => 'required|integer',           
         ];
     }
 }

@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     
-    protected $fillable = ['name', 'price', 'hotel_id', 'parent_id'];
+    protected $fillable = [
+        'name', 
+        'price', 
+        'hotel_id', 
+        'parent_id',
+    ];
+    
     public $timestamps = false;
 
     public function hotel()

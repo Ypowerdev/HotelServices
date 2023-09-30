@@ -9,7 +9,12 @@ class Hotel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['adress','coordinates', 'city_id', 'name'];
+    protected $fillable = [
+        'adress',
+        'coordinates', 
+        'city_id',
+        'name',
+    ];
 
     public $timestamps = false;
 

@@ -9,10 +9,16 @@ use Illuminate\Http\JsonResponse;
 
 class OrdersController extends Controller
 {
-    public function store(OrderStoreRequest $request, OrderMethods $order)
+    public function __construct(private OrderMethods $orderService)
+    { 
+    }
+
+    public function store(OrderStoreRequest $request): JsonResponse
     { 
         $data = $request->validated(); 
-        $order->store($data);  
-        return new JsonResponse();  
+        $this->orderService->store($data);  
+        return new JsonResponse([
+            'message' => 'Service with ID ' . $this->orderService->order->id.  ' provided  successfully' 
+        ], 200);         
     }   
 }

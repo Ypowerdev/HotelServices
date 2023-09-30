@@ -2,17 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseApiFormRequest;
 
-class HotelStoreRequest extends FormRequest
+class HotelStoreRequest extends BaseApiFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,11 +15,10 @@ class HotelStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'adress' => 'required|string|min:5|max:40',
             'coordinates' => 'required|numeric',
             'city_id' => 'required|integer',
-            'name' => 'required|string'
+            'name' => 'required|string',
         ];
     }
 }

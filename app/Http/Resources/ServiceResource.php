@@ -19,7 +19,7 @@ class ServiceResource extends JsonResource
             'name' => $this->name, 
             'price' => $this->price,
             'hotel_id' => $this->hotel_id, 
-            'parent_id' => $this->parent_id
+            'parent_id' => $this->parent_id,
        ]; 
     }
 }

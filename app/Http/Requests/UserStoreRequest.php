@@ -2,18 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseApiFormRequest;
 
-class UserStoreRequest extends FormRequest
+class UserStoreRequest extends BaseApiFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
+   
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +17,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:20', 
             'email' => 'required|string|email',
-            'password' => 'required|string|min:5|max:20'
+            'password' => 'required|string|min:5|max:20',
         ];
     }
 }

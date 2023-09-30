@@ -4,57 +4,62 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Resources\UserResource;
+use App\Services\User\UserMethods;
 use App\Http\Requests\UserStoreRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthController extends Controller
 {
-    public function register(UserStoreRequest $request): User 
-    { 
-        return User::create([
-            'name' => $request->input('name'),  
-            'email' => $request->input('email'), 
-            'password' => Hash::make ($request->input('password'))
-        ]);         
+    public function __construct(private UserMethods $userService)
+    {        
     }
 
-    public function login(Request $request)
+    public function register(UserStoreRequest $request): JsonResource
     { 
-       if(!Auth::attempt($request->only('email', 'password'))){ 
-           return response([
+        $values = [
+            'name' => $request->input('name'),  
+            'email' => $request->input('email'), 
+            'password' => Hash::make($request->input('password'))
+        ]; 
+
+        return new UserResource($this->userService->register($values));            
+    }
+
+    public function login(Request $request): JsonResponse
+    { 
+        if(!Auth::attempt($request->only('email', 'password'))){ 
+           return new JsonResponse([
                 'message' => 'Invalid credentials'
            ], Response::HTTP_UNAUTHORIZED);  
-       }     
+        }     
                   
-        $user = Auth::user(); 
-        $token = $user->createToken('token')->plainTextToken;
+        $token = $this->userService->createToken();
         
         $response = [ 
             'message' => 'Success', 
             'token' => $token 
         ];
 
-        return response($response, 200);
+        return new JsonResponse($response, 200);
     }
 
-    public function user()
+    public function user(): User
     { 
-        return Auth::user(); 
+        return $this->userService->showAuthUser(); 
     }
 
-    public function logout()
-    { 
-        $cookie = Cookie::forget('jwt');
-
-        return response ([
-            'message' => 'Success'
-        ])->withCookie($cookie);    
-  
-    }
-
-    
+    public function logout(): JsonResponse
+    {         
+        $this->userService->deleteToken();
+        
+        return new JsonResponse([
+            'message' => 'Logged out successfully'
+        ]);    
+    }    
 }
