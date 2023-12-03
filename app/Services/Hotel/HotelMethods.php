@@ -30,5 +30,9 @@ class HotelMethods
     { 
         return Hotel::findOrFail($id);
     }   
-     
+
+    public function destroy(Hotel $hotel): bool
+    { 
+        return $hotel->delete();
+    }
 }

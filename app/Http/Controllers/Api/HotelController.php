@@ -60,7 +60,7 @@ class HotelController extends Controller
             ], 404);
         }
 
-        $hotel->delete();
+        $this->hotelService->destroy($hotel);
 
         return new JsonResponse([
             'message' => 'Hotel deleted successfully' 

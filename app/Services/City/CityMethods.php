@@ -30,4 +30,9 @@ class CityMethods
     { 
         return City::find($id);  
     }         
+
+    public function destroy(City $city): bool
+    { 
+        return $city->delete();     
+    }         
 }

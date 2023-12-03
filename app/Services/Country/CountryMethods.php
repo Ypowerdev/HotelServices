@@ -29,5 +29,10 @@ class CountryMethods
     public function findCountryId(int $id): ?Country
     { 
         return Country::find($id);  
-    }        
+    }   
+    
+    public function destroy(Country $country): bool
+    { 
+        return $country->delete();  
+    }    
 }

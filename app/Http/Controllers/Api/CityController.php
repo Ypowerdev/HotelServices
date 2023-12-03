@@ -67,7 +67,7 @@ class CityController extends Controller
             ], 404);
         }
 
-        $city->delete();
+        $this->cityService->destroy($city);
 
         return new JsonResponse([
             'message' => 'City deleted successfully' 

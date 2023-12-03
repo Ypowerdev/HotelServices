@@ -31,4 +31,9 @@ class ServiceMethods
         return Service::findOrFail($id);  
     }
 
+    public function destroy(Service $service): bool
+    { 
+        return $service->delete();  
+    }
+
 }
