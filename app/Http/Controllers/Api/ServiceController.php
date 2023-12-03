@@ -61,7 +61,7 @@ class ServiceController extends Controller
             ], 404);
         }
 
-        $service->delete();
+        $this->service->destroy($service);
 
         return new JsonResponse([
             'message' => 'Service deleted successfully' 

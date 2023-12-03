@@ -53,7 +53,7 @@ class CountryController extends Controller
             ], 404);
         }
 
-        $country->delete();
+        $this->countryService->destroy($country);
 
         return new JsonResponse([
             'message' => 'Country deleted successfully' 

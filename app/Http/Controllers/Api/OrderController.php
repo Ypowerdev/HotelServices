@@ -7,7 +7,7 @@ use App\Http\Requests\OrderStoreRequest;
 use App\Services\Order\OrderMethods;
 use Illuminate\Http\JsonResponse;
 
-class OrdersController extends Controller
+class OrderController extends Controller
 {
     public function __construct(private OrderMethods $orderService)
     { 
