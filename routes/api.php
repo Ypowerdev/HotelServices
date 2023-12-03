@@ -53,5 +53,5 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 Route::middleware('auth:sanctum')->group(function(){ 
     Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user']);
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
-    Route::post('/orders', [\App\Http\Controllers\Api\OrdersController::class, 'store']);
+    Route::post('/orders', [\App\Http\Controllers\Api\OrderController::class, 'store']);
 });
