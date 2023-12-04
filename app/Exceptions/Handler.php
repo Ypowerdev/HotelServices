@@ -2,11 +2,9 @@
 
 namespace App\Exceptions;
 
-use Exception;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-use App\Helpers\Telegram;
-use Illuminate\Container\Container;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
