@@ -28,7 +28,7 @@ class CityMethods
      
     public function findCityId(int $id): ?City
     { 
-        return City::findOrFail($id);  
+        return City::find($id);  
     }         
 
     public function destroy(City $city): bool

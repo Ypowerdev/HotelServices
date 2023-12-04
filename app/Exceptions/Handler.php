@@ -8,6 +8,7 @@ use Throwable;
 use App\Helpers\Telegram;
 use Illuminate\Container\Container;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -31,7 +32,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+        if ($exception instanceof ModelNotFoundException) {
             return new JsonResponse([
                 'error' => 'Data not found'
             ], 404);       

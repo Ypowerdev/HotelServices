@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\NotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HotelResource; 
 use App\Http\Requests\HotelStoreRequest; 
@@ -32,6 +33,10 @@ class HotelController extends Controller
     {                              
         $cityId = $request->input('city_id');
         $isCityExists = $this->cityService->findCityId($cityId);
+        
+        if(!$isCityExists){          
+            throw new NotFoundException('City is not found');
+        }
                   
         return new HotelResource(
             $this->hotelService->create(
