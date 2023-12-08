@@ -28,12 +28,12 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception): ?JsonResponse
     {
         if ($exception instanceof ModelNotFoundException) {
             return new JsonResponse([
                 'error' => 'Data not found'
-            ], 404);       
+            ], 404);
         }
         return parent::render($request, $exception);
     }
