@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions; 
+namespace App\Exceptions;
 
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -12,8 +12,8 @@ class NotFoundException extends HttpException
         parent::__construct($code, $message, $previous);
     }
 
-    public function render($request)
-    { 
+    public function render($request): JsonResponse
+    {
         return new JsonResponse([
             'error' => $this->getMessage()
         ],

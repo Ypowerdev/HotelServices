@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Hotel extends Model
 {
@@ -11,14 +12,14 @@ class Hotel extends Model
 
     protected $fillable = [
         'adress',
-        'coordinates', 
+        'coordinates',
         'city_id',
         'name',
     ];
 
     public $timestamps = false;
 
-    public function city()
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
